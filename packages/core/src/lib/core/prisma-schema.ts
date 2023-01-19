@@ -232,7 +232,7 @@ generator client {
       prismaSchema += `\n@@map(${JSON.stringify(dbMap)})`;
     }
     if (dbUnique !== undefined) {
-      prismaSchema += `\n@@unique(${JSON.stringify(dbUnique)})`;
+      prismaSchema += `\n@@unique(${dbUnique})`;
     }
     prismaSchema += `\n}\n`;
   }
