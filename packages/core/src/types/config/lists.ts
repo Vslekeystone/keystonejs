@@ -236,4 +236,8 @@ export type ListDBConfig = {
    * the default (derived from the list key)
    */
   map?: string;
+  /**
+   * Adds a Prisma @unique attribute to this field which can give unique values across multiple fields
+   */
+  unique?: string;
 };

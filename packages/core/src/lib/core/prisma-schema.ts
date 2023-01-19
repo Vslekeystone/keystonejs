@@ -212,7 +212,9 @@ generator client {
   output   = "node_modules/.prisma/client"${prismaFlags}
 }
 \n`;
-  for (const [listKey, { resolvedDbFields, dbMap, isSingleton }] of Object.entries(lists)) {
+  for (const [listKey, { resolvedDbFields, dbMap, isSingleton, dbUnique }] of Object.entries(
+    lists
+  )) {
     prismaSchema += `model ${listKey} {`;
     for (const [fieldPath, field] of Object.entries(resolvedDbFields)) {
       if (field.kind !== 'none' && !(isSingleton && fieldPath === 'id')) {
@@ -228,6 +230,9 @@ generator client {
     }
     if (dbMap !== undefined) {
       prismaSchema += `\n@@map(${JSON.stringify(dbMap)})`;
+    }
+    if (dbUnique !== undefined) {
+      prismaSchema += `\n@@unique(${JSON.stringify(dbUnique)})`;
     }
     prismaSchema += `\n}\n`;
   }
